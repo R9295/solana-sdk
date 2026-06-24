@@ -1,0 +1,25 @@
+[package]
+name = "fuzz"
+version = "0.1.0"
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+license.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+wincode = { workspace = true, features = ["alloc"] }
+ziggy = "1.7.1"
+
+# Every workspace crate with a hand-written `wincode::SchemaWrite` impl, with the
+# `wincode` feature that gates those impls turned on.
+solana-loader-v3-interface = { workspace = true, features = ["wincode"] }
+solana-message = { workspace = true, features = ["wincode"] }
+solana-short-vec = { workspace = true, features = ["wincode"] }
+solana-transaction = { workspace = true, features = ["wincode"] }
+solana-vote-interface = { workspace = true, features = ["wincode"] }
+solana-wincode-varint = { workspace = true }
+
+[lints]
+workspace = true

@@ -33,7 +33,7 @@ members = [
     "fee-structure",
     "file-download",
     "frozen-abi",
-    "frozen-abi-macro",
+    "frozen-abi-macro", "fuzz",
     "genesis-config",
     "get-sysvar",
     "hard-forks",
