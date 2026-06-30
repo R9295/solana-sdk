@@ -1,0 +1,24 @@
+[package]
+name = "solana-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+wincode = { workspace = true, features = ["alloc"] }
+solana-message = { workspace = true, features = ["wincode"] }
+solana-short-vec = { workspace = true, features = ["wincode"] }
+solana-transaction = { workspace = true, features = ["wincode"] }
+solana-vote-interface = { workspace = true, features = ["wincode"] }
+solana-wincode-varint.workspace = true
+
+[[bin]]
+name = "custom_deser_roundtrip"
+path = "fuzz_targets/custom_deser_roundtrip.rs"
+test = false
+doc = false
+bench = false

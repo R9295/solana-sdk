@@ -34,6 +34,7 @@ members = [
     "file-download",
     "frozen-abi",
     "frozen-abi-macro",
+    "fuzz",
     "genesis-config",
     "get-sysvar",
     "hard-forks",

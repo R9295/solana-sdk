@@ -1,0 +1,35 @@
+name: Fuzz Deser Coverage
+
+# Ensures every type with a custom wincode codec (a hand-written
+# SchemaRead/SchemaWrite impl, or a `#[wincode(with = "...")]` field) is covered
+# by the `custom_deser_roundtrip` fuzz harness, or is explicitly exempted in
+# scripts/check-fuzz-deser-coverage.py.
+
+on:
+  push:
+    branches:
+      - 'master'
+      - 'maintenance/**'
+  pull_request:
+    branches:
+      - 'master'
+      - 'maintenance/**'
+    paths:
+      - '**/*.rs'
+      - 'fuzz/fuzz_targets/custom_deser_roundtrip.rs'
+      - 'scripts/check-fuzz-deser-coverage.py'
+      - '.github/workflows/fuzz-deser-coverage.yml'
+
+jobs:
+  check:
+    name: fuzz deser coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0  # v7.0.0
+
+      - name: Install ast-grep
+        run: npm install -g @ast-grep/cli@0.44.0
+
+      - name: Check custom-schema types are fuzzed
+        run: python3 scripts/check-fuzz-deser-coverage.py
